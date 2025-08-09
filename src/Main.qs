@@ -1,9 +1,12 @@
-// # Sample
-// Getting started
-//
-// # Description
-// This is a minimal Q# program that can be used to start writing Q# code.
+import Std.Diagnostics.DumpMachine;
+import Microsoft.Quantum.Diagnostics;
 
-operation Main() : Unit {
-    // TODO: Write your Q# code here.
+operation Main() : (Result, Result) {
+    use (q1, q2) = (Qubit(), Qubit());
+    H(q1);
+    CNOT(q1, q2);
+    DumpMachine();
+    let (m1, m2) = (M(q1), M(q2));
+    ResetAll([q1, q2]);
+    return (m1, m2);
 }
